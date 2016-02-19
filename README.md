@@ -1,3 +1,3 @@
-# docker-python3-opencv
+# opencv3-python3-mini
 
-Docker image with python 3 and opencv 3.0
+Alipine linux image with opencv 3 compiled to work with python3
