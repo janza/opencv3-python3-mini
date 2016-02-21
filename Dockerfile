@@ -37,13 +37,11 @@ ENV CXX /usr/bin/clang++
 ADD numpy.patch /numpy.patch
 RUN pip install requests cython
 
-RUN curl --insecure https://codeload.github.com/numpy/numpy/tar.gz/maintenance/1.10.x | tar xz
+RUN curl --insecure https://codeload.github.com/numpy/numpy/tar.gz/maintenance/1.10.x | tar xz \
     && cd numpy-maintenance-1.10.x/numpy/core/src/private/ \
     && patch < /numpy.patch \
     && cd /numpy-maintenance-1.10.x \
-    && python setup.py install
-
-RUN whet https://github.com/numpy/numpy/zipball/maintenance/1.11.x
+    && python3 setup.py install
 
 RUN wget https://github.com/Itseez/opencv/archive/3.1.0.zip \
     && unzip 3.1.0.zip \
