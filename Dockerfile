@@ -33,7 +33,8 @@ RUN wget "https://bootstrap.pypa.io/get-pip.py" -O - | python3
 ENV CC /usr/bin/clang
 ENV CXX /usr/bin/clang++
 
-RUN pip install requests numpy==1.9.3
+# install numpy from github to get: https://github.com/numpy/numpy/commit/f189e2adcdd05596a6f65b4097e2f12f9c0d9ce9
+RUN pip install requests https://github.com/numpy/numpy/zipball/maintenance/1.11.x
 
 RUN wget https://github.com/Itseez/opencv/archive/3.1.0.zip \
     && unzip 3.1.0.zip \
