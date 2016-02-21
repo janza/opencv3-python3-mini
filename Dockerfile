@@ -34,7 +34,16 @@ ENV CC /usr/bin/clang
 ENV CXX /usr/bin/clang++
 
 # install numpy from github to get: https://github.com/numpy/numpy/commit/f189e2adcdd05596a6f65b4097e2f12f9c0d9ce9
-RUN pip install requests https://github.com/numpy/numpy/zipball/maintenance/1.11.x
+ADD numpy.patch /numpy.patch
+RUN pip install requests cython
+
+RUN curl --insecure https://codeload.github.com/numpy/numpy/tar.gz/maintenance/1.10.x | tar xz
+    && cd numpy-maintenance-1.10.x/numpy/core/src/private/ \
+    && patch < /numpy.patch \
+    && cd /numpy-maintenance-1.10.x \
+    && python setup.py install
+
+RUN whet https://github.com/numpy/numpy/zipball/maintenance/1.11.x
 
 RUN wget https://github.com/Itseez/opencv/archive/3.1.0.zip \
     && unzip 3.1.0.zip \
